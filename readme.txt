@@ -1,4 +1,4 @@
-LEXICAL ANALYZER FOR A C++ PROGRAM USING QT-CREATOR:
+LEXICAL ANALYZER USING QT-CREATOR:
 
 In order to run the Lexical Analyzer, you need to have a C++ test file. After building, call the LexicalAnalyzer.exe in the 
 command line with the first argument as the full file location and name of the test program file.
