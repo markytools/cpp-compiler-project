@@ -5,6 +5,6 @@ command line with the first argument as the full file location and name of the t
 
 Requirements: C++11
 Steps:
-1. Shift-Right Click inside the directory where the .exe file is located.
+1. Shift-Right Click inside the directory where the .exe file is located. Open command line/terminal from there.
 2. Type in the command line:
 	.\LexicalAnalyzerCPP.exe "D:\path\to\build\folder\build-LexicalAnalyzerCPP-Desktop_Qt_5_9_ 1_MinGW_32bit-Release\release\testprogram.txt"
