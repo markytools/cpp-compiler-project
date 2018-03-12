@@ -7,7 +7,14 @@
 
 using namespace std;
 
-//Returns the next node to be scanned
+//This function checks for keywords for the Lexical Analyzer. It traverses a Trie wherein it is going to check the characters of every
+//keyword if it is inside of it. If the characters are found, then the &keyword will store the values of these characters up until the Trie
+//ends up in a node where the @isString boolean variable returns true. Once this happens, it first checks if the non-alphanumeric regex
+//matches the next character, to avoid having an identifier. If it's not, the keyword then gets to be stored into the list of
+//keywords which is a vector object @keywords.
+//
+//
+//It returns the next node to be scanned.
 Node *checkForKeyword(TrieSet *keywordTrie, Node *currentNode, vector<string> *keywords, string &keyword, char c, bool hasMaskwords) {
     if (hasMaskwords) {
         keyword = "";
@@ -35,6 +42,9 @@ Node *checkForKeyword(TrieSet *keywordTrie, Node *currentNode, vector<string> *k
     return keywordTrie->getRoot();
 }
 
+//This function checks if a character corresponds to an alphabet letter. If it is, it then checks if the next character is an alphanumeric
+//character for it to be a valid identifier. Once it gets to a regex that does not match, the remaining @identifier are to be checked
+//if it does not collide with a keyword. If it does, then it won't add it to list of identifiers, otherwise it's going to be added to the list.
 string checkForIdentifier(vector<string> *identifiers, string &identifier, char c, bool &isKeyword, bool &isLiteral, bool hasMaskwords) {
     if (hasMaskwords) {
         identifier = "";
@@ -61,6 +71,9 @@ string checkForIdentifier(vector<string> *identifiers, string &identifier, char 
     return identifier;
 }
 
+//A trie is still going to be used to check if the characters of a literal manage to match the characters of an input file. A boolean variable
+//called @singleQuoteLiteral or @doubleQuoteLiteral is activated when the current char is inside a single quotation or double quotation state,
+//respectively.
 Node *checkForLiteral(TrieSet *literalTrie, Node *currentNode, vector<string> *literals, string &literal, char c, char prevChar, bool &insideSingleQuotes,
                       bool &insideDoubleQuotes, bool &singleQuoteLiteral, bool &doubleQuoteLiteral, bool &isCheckingNumber,
                       bool firstCommentActivated, bool secondCommentActivated) {
@@ -134,6 +147,8 @@ Node *checkForLiteral(TrieSet *literalTrie, Node *currentNode, vector<string> *l
     return literalTrie->getRoot();
 }
 
+//The separators are distinguished by the characters identified as such. They are compared using the 'or' condition, as there are only a few
+//characters that are regarded as such
 void checkForSeparator(vector<string> *separator, char c, bool hasMaskwords) {
     string charStr(1, c);
     if (!hasMaskwords)
@@ -247,10 +262,7 @@ int main(int argc, char *argv[])
     keywordTrie->insert("while");
     keywordTrie->insert("return");
     keywordTrie->insert("void");
-    keywordTrie->insert("cout");
-    keywordTrie->insert("cin");
     keywordTrie->insert("else");
-    keywordTrie->insert("endl");
     keywordTrie->insert("auto");
     keywordTrie->insert("break");
     keywordTrie->insert("case");
